@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Phoenix',
   description: 'Reactive ÐApp Development',
+  base: '/phoenix-docs/',
   themeConfig: {
     displayAllHeaders: true,
     nav: [
