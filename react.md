@@ -11,6 +11,7 @@ const ObserverComponent = observe(WrappedComponent);
 This enhanced component will subscribe to any observable property it receives when the component is mounted and automatically unsubscribe when the component is unmounted.
 
 ### Example
+Available in [Github](https://github.com/status-im/phoenix/tree/master/examples/react)
 
 #### MyComponentObserver.js
 ```js
@@ -21,7 +22,7 @@ import {observe} from "phoenix/react";
 const MyComponent = ({eventData}) => {
   // Handle initial state when no data is available
   if (!eventData) {
-    return <p>Loading...</p>;
+    return <p>No data</p>;
   }
   
   return <p>{eventData.someReturnedValue}</p>
@@ -34,29 +35,25 @@ export default observe(MyComponent);
 
 #### App.js
 ```js
-/* global web3 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Phoenix from 'phoenix';
 
 import MyComponentObserver from './MyComponentObserver';
 
-// This is a web3.eth.Contract object
-import SimpleStorageContract from "./SimpleStorageContract"; 
- 
-
 class App extends Component {
   state = {
     myEventObservable$: null
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
+
     const eventSyncer = new Phoenix(web3.currentProvider);
-    eventSyncer.init()
-      .then(
-        const myEventObservable$ = eventSyncer.trackEvent(SimpleStorageContract, "MyEvent", {}, fromBlock: 1 });
-        this.setState({ myEventObservable$ });
-      );
+    await eventSyncer.init()
+    
+    const myEventObservable$ = eventSyncer.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 });
+    this.setState({ myEventObservable$ });
   }
 
   render() {
@@ -66,6 +63,9 @@ class App extends Component {
 
 export default App;
 ```
+
+The variable `MyContractInstance` is a `web3.eth.Contract` object pointing to a deployed contract address. You can use a DApp framework like [Embark](https://embark.status.im/docs/contracts_javascript.html) to easily import that contract instance: `import { MyContract } from './embarkArtifacts/contracts';`, or use web3.js directly (just like in the example [source code](https://github.com/status-im/phoenix/blob/master/examples/react/src/MyContract.js#L36-L42))
+
 
 #### index.js
 ```js
