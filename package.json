@@ -7,7 +7,8 @@
     "clean": "rimraf .vuepress/dist",
     "build": "vuepress build",
     "push-dir": "push-dir --dir=.vuepress/dist --branch=gh-pages",
-    "publish": "npm-run-all clean build push-dir"
+    "publish": "npm-run-all clean build push-dir",
+    "start": "vuepress dev"
   },
   "repository": {
     "type": "git",

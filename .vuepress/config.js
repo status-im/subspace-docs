@@ -6,8 +6,9 @@ module.exports = {
     displayAllHeaders: true,
     nav: [
       { text: 'Getting Started', link: '/getting-started/' },
-      { text: 'API', link: '/api' },
+      { text: 'Tutorial', link: '/tutorial' },
       { text: 'Integrations', link: '/integrations-overview' },
+      { text: 'API', link: '/api' },
       { text: 'Github', link: 'https://github.com/status-im/phoenix' },
     ],
     sidebar: [
@@ -20,11 +21,20 @@ module.exports = {
         children: [
           ['/integrations-overview', 'Overview'],
           '/react',
-          '/redux',
-          '/redux-observables'
+          {
+            title: 'Redux',
+            collapsable: false,
+            children: [
+              '/redux',
+              '/redux-observables'
+            ]
+          },
+          '/graphql',
+          '/apollo-client'
         ]
       },
-      '/api',
+      ['/tutorial', 'Tutorial'],
+      '/api'
     ]
   },
 };

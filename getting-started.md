@@ -26,7 +26,9 @@ To interact with the EVM, Phoenix requires a valid websockets Web3 provider.
 
 ```js
 const eventSyncer = new Phoenix(web3.currentProvider);
-eventSyncer.init();
+eventSyncer.init().then(() => {
+  // Track data!
+});
 ```
 
 In addition to the provider, `Phoenix` also accepts an `options` object with settings that can change its behavior:
@@ -45,7 +47,9 @@ const contractObject = ...; // A web3.eth.Contract object initialized with an ad
 const functionName = "..."; // string containing the name of the contract's constant/view function to track.
 const functionArgs = []; // array containing the arguments of the function to track. Optional
 const callOptions = {from: web3.eth.defaultAccount}; //  Options used for calling. Only `from`, `gas` and `gasPrice` are accepted. Optional
-eventSyncer.trackProperty(contractObject, functionName, functionArgs, callOptions)
+
+eventSyncer
+  .trackProperty(contractObject, functionName, functionArgs, callOptions)
   .subscribe(value => console.dir)
 ```
 This can be used as well to track public state variables, since they implicity create a view function when they're declared public. The `functionName` would be the same as the variable name, and `functionArgs` would have a value when the type is a `mapping` or `array` (since these require an index value to query them).
@@ -59,7 +63,8 @@ const contractObject = ...; // A web3.eth.Contract object initialized with an ad
 const eventName = "..."; // string containing the name of the event to track.
 const options = { filter: { }, fromBlock: 1 }; // options used to query the events. Optional
 
-eventSyncer.trackEvent(contractObject, eventName, options)
+eventSyncer
+  .trackEvent(contractObject, eventName, options)
   .subscribe(eventData => console.dir);
 ```
 
@@ -84,7 +89,8 @@ eventSyncer
 const address = "0x0001020304050607080900010203040506070809";
 const tokenAddress = "0x744d70fdbe2ba4cf95131626614a1763df805b9e"; // SNT Address
 
-eventSyncer.trackBalance(address, tokenAddress)
+eventSyncer
+  .trackBalance(address, tokenAddress)
   .subscribe((balance) => {
     console.log("Token balance is ", balance)
   });
