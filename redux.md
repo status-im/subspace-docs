@@ -2,26 +2,37 @@
 
 Phoenix can be used with [redux](https://redux.js.org/). Phoenix returns [`Observables`](https://rxjs-dev.firebaseapp.com/guide/observable), which you can subscribe to, and if this subscription has access to the redux store, it will be able to dispatch actions when the observable emits an event.
 
-Here's a simple example on how to setup Phoenix to work with `redux`. An example using `react` and `redux` can be found in the `examples` folder.
+### Example
+Here's a simple example on how to setup Phoenix to work with `redux`. It is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/redux)
 
+::: tip Using React and Redux
+A practical example can also be found in the `examples/` folder.
+:::
 
 #### index.js
 ```js
-/* global web3 */
 import store from './store';
+import web3 from './web3';
 import Phoenix from 'phoenix';
 import { myAction } from './actions';
 
-const eventSyncer = new Phoenix(web3.currentProvider);
+const run = async () => {
+  const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
-eventSyncer.init().then(() => {
-  eventSyncer
-    .trackEvent(MyContract, "MyEvent", { filter: {}, fromBlock: 1})
-    .subscribe(eventData => {
-      store.dispatch(myAction(eventData));
-    });
-});
+  const eventSyncer = new Phoenix("wss://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
+  await eventSyncer.init();
+    
+  eventSyncer.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 })
+             .subscribe(eventData => {
+               store.dispatch(myAction(eventData));
+             });
+}
+
+run();
 ```
+::: warning Handling Contract Objects
+The variable `MyContractInstance` is a `web3.eth.Contract` object pointing to a deployed contract address. You can use a DApp framework like [Embark](https://embark.status.im/docs/contracts_javascript.html) to easily import that contract instance: `import { MyContract } from './embarkArtifacts/contracts';`, or use web3.js directly (just like in the example [source code](https://github.com/status-im/phoenix/blob/master/examples/redux/src/MyContract.js#L36-L42))
+:::
 
 #### store.js
 ```js

@@ -2,6 +2,9 @@ module.exports = {
   title: 'Phoenix',
   description: 'Reactive ÐApp Development',
   base: '/phoenix-docs/',
+  markdown: {
+    lineNumbers: true
+  },
   themeConfig: {
     displayAllHeaders: true,
     nav: [
