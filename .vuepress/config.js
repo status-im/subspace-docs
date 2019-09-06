@@ -29,7 +29,7 @@ module.exports = {
             collapsable: false,
             children: [
               '/redux',
-              '/redux-observables'
+              '/redux-observable'
             ]
           },
           '/graphql',

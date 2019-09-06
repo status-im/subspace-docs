@@ -11,7 +11,11 @@ const ObserverComponent = observe(WrappedComponent);
 This enhanced component will subscribe to any observable property it receives when the component is mounted and automatically unsubscribe when the component is unmounted.
 
 ### Example
+
+::: tip 
 This example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/react)
+:::
+
 
 #### MyComponentObserver.js
 ```js

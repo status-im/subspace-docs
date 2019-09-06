@@ -32,12 +32,12 @@ eventSyncer.init().then(() => {
 ```
 
 In addition to the provider, `Phoenix` also accepts an `options` object with settings that can change its behavior:
-- `dbFilename` - Name of the database where the information will be stored (default 'phoenix.db')
-- `callInterval` - Interval of time in milliseconds to query a contract/address to determine changes in state or balance (default: obtain data every block).
+- `dbFilename` - Name of the database where the information will be stored (default `'phoenix.db'`)
+- `callInterval` - Interval of time in milliseconds to query a contract/address to determine changes in state or balance (default: `undefined`. Obtains data every block).
 
 
 ## Reacting to data
-Phoenix provides tracking functions for contract state, events and balances. These functions return RxJS Observables which you can subscribe to, and obtain and transform the observed data via operators.
+Once it's initialized, you can use Phoenix's methods to track the contract state, events and balances. These functions return RxJS Observables which you can subscribe to, and obtain and transform the observed data via operators.
 
 
 ### Tracking a contract's state
@@ -48,12 +48,12 @@ const functionName = "..."; // string containing the name of the contract's cons
 const functionArgs = []; // array containing the arguments of the function to track. Optional
 const callOptions = {from: web3.eth.defaultAccount}; //  Options used for calling. Only `from`, `gas` and `gasPrice` are accepted. Optional
 
-eventSyncer
-  .trackProperty(contractObject, functionName, functionArgs, callOptions)
-  .subscribe(value => console.dir)
+const myObservable$ = eventSyncer.trackProperty(contractObject, functionName, functionArgs, callOptions);
 ```
-This can be used as well to track public state variables, since they implicity create a view function when they're declared public. The `functionName` would be the same as the variable name, and `functionArgs` would have a value when the type is a `mapping` or `array` (since these require an index value to query them).
 
+::: tip Tracking the public variables of a contract
+State variables implicity create a `view` function when they're defined as `public`. The `functionName` would be the same as the variable name, and `functionArgs` would have a value when the type is a `mapping` or `array` (since these require an index value to query them).
+:::
 
 
 ### Tracking contract events
@@ -63,15 +63,14 @@ const contractObject = ...; // A web3.eth.Contract object initialized with an ad
 const eventName = "..."; // string containing the name of the event to track.
 const options = { filter: { }, fromBlock: 1 }; // options used to query the events. Optional
 
-eventSyncer
-  .trackEvent(contractObject, eventName, options)
-  .subscribe(eventData => console.dir);
+const myEventObservable$ = eventSyncer.trackEvent(contractObject, eventName, options)
+
 ```
 
 
 
 ### Tracking balances of addresses
-You can also track changes in both ETH and ERC20 token balances for each mined block or time interval depending on the `callInterval` configured. Balances are returned as a string containing the vaue in wei.
+You can also track changes in both ETH and ERC20 token balances for each mined block or time interval depending on the `callInterval` configured. 
 
 ```js
 // Tracking ETH balance
@@ -89,32 +88,38 @@ eventSyncer
 const address = "0x0001020304050607080900010203040506070809";
 const tokenAddress = "0x744d70fdbe2ba4cf95131626614a1763df805b9e"; // SNT Address
 
-eventSyncer
-  .trackBalance(address, tokenAddress)
-  .subscribe((balance) => {
-    console.log("Token balance is ", balance)
-  });
+const myBalanceObservable$ = eventSyncer.trackBalance(address, tokenAddress);
 ```
-
-
+::: warning Balance units
+Balances are returned as a string containing the value in *wei*.
+:::
 
 ## Subscriptions
-You may have noticed that each tracking function has a `.subscribe()`. Subscriptions are triggered each time an observable emits a new value. These subscription receive a callback that must have a parameter which represents the value received from the observable;  and they return a subscription.
+Once you have an `Observable`, you may receive a stream of data by creating a subscription.Subscriptions are triggered each time an observable emits a new value. These subscription receive a callback that must have a parameter which represents the value received from the observable (a contract state variable, an event, or the balance of an address);  and they return an object representing the subscription.
 
 Subscriptions can be disposed by executing the method `unsubscribe()` liberating the resource held by it:
 
 ```js
-const subscription = eventSyncer.trackBalance(address, tokenAddress).subscribe(value => { /* Do something */ });
+const myBalanceObservable$ = eventSyncer.trackBalance(address, tokenAddress);
+const subscription = myBalanceObservable$.subscribe(value => { 
+  console.log("The balance is: ", value); 
+});
 
 // ...
 
 subscription.unsubscribe();
 ```
 
-## Cleanup
-If Phoenix `eventSyncer` is not needed anymore, you need to invoke `clean()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution.  Any subscription created via the tracking methods must be unsubscribed manually (in the current version).
+#### Further read
+- [RxJS Subscriptions](https://rxjs-dev.firebaseapp.com/guide/subscription)
 
+
+## Cleanup
+If Phoenix `eventSyncer` is not needed anymore, you need to invoke `clean()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution.
 ```
 eventSyncer.clean();
 ```
+::: warning Observer subscriptions
+Any subscription created via the tracking methods must be unsubscribed manually (in the current version).
+:::
 
