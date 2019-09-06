@@ -39,6 +39,11 @@ In addition to the provider, `Phoenix` also accepts an `options` object with set
 ## Reacting to data
 Once it's initialized, you can use Phoenix's methods to track the contract state, events and balances. These functions return RxJS Observables which you can subscribe to, and obtain and transform the observed data via operators.
 
+::: tip What is an Observable?
+The `Observable` type can be used to model push-based data sources such as DOM events, timer intervals, and sockets. In addition, observables are:
+- Compositional: Observables can be composed with higher-order combinators.
+- Lazy: Observables do not start emitting data until an observer has subscribed.
+:::
 
 ### Tracking a contract's state
 You can track changes to the contract state, by specifying the view function and arguments to call and query the contract. 
@@ -90,7 +95,7 @@ const tokenAddress = "0x744d70fdbe2ba4cf95131626614a1763df805b9e"; // SNT Addres
 
 const myBalanceObservable$ = eventSyncer.trackBalance(address, tokenAddress);
 ```
-::: warning Balance units
+::: warning 
 Balances are returned as a string containing the value in *wei*.
 :::
 
@@ -119,7 +124,7 @@ If Phoenix `eventSyncer` is not needed anymore, you need to invoke `clean()` to 
 ```
 eventSyncer.clean();
 ```
-::: warning Observer subscriptions
+::: warning What about subscriptions created with our observables?
 Any subscription created via the tracking methods must be unsubscribed manually (in the current version).
 :::
 

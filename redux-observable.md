@@ -24,9 +24,10 @@ const myEpic = action$ =>
 // ...
 ```
 
-#### Further read
-- [Epics](https://redux-observable.js.org/docs/basics/Epics.html)
-
 ::: tip 
 An example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/redux-observable)
 :::
+
+#### Further read
+- [Epics](https://redux-observable.js.org/docs/basics/Epics.html)
+
