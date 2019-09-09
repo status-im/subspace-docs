@@ -122,7 +122,7 @@ subscription.unsubscribe();
 ## Cleanup
 If Phoenix `eventSyncer` is not needed anymore, you need to invoke `clean()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution.
 ```
-eventSyncer.clean();
+eventSyncer.close();
 ```
 ::: warning What about subscriptions created with our observables?
 Any subscription created via the tracking methods must be unsubscribed manually (in the current version).
