@@ -45,6 +45,10 @@ The `Observable` type can be used to model push-based data sources such as DOM e
 - Lazy: Observables do not start emitting data until an observer has subscribed.
 :::
 
+#### Further read
+- [RxJS Observables](https://rxjs-dev.firebaseapp.com/guide/observable)
+
+
 ### Tracking a contract's state
 You can track changes to the contract state, by specifying the view function and arguments to call and query the contract. 
 ```js
@@ -120,7 +124,8 @@ subscription.unsubscribe();
 
 
 ## Cleanup
-If Phoenix `eventSyncer` is not needed anymore, you need to invoke `clean()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution.
+If Phoenix is not needed anymore, you need can invoke `close()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution, thus avoiding any potential memory leak.
+
 ```
 eventSyncer.close();
 ```
