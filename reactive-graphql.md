@@ -1,6 +1,6 @@
 # reactive-graphql
 
-Using `reactive-graphql` you can execute GraphQL queries against Phoenix observables to it, and create your own type definitions and queries.
+Using `reactive-graphql` you can execute GraphQL queries against Phoenix observables after you create your own type definitions and resolvers.
 
 ### Example
 

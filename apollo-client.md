@@ -1,74 +1,75 @@
-```js
-import gql from "graphql-tag";
-import { ApolloClient } from "apollo-client";
-import { ApolloProvider, Query } from "react-apollo";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import Phoenix from "phoenix";
-import Web3 from "web3";
-import { makeExecutableSchema } from "graphql-tools";
-import PhoenixRxLink from "./phoenix-rx-link";
+# apollo-client
+To use Phoenix with `apollo-client`, a composed `ApolloLink` must be defined using the `apollo-link-rxjs` and `reactive-graphl` npm packages. Notice that the `addTypename` option of `InMemoryCache` must be set `false`.
 
-const MY_QUERY = gql`
-  query {
-    escrows {
-      escrowId
-    }
+```js
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloLink } from "apollo-link";
+import { rxjs as rxJsLink } from "apollo-link-rxjs";
+import { graphql } from "reactive-graphql";
+
+const client = new ApolloClient({
+  // If addTypename:true, the query will fail due to __typename
+  // being added to the schema. reactive-graphql does not
+  // support __typename at this moment.
+  cache: new InMemoryCache({ addTypename: false }),
+  link: ApolloLink.from([
+          rxJsLink({}),
+          new ApolloLink(operation => graphql(schema, operation.query))
+        ])
+});
+```
+
+### Example
+
+```js{32-45}
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloLink } from "apollo-link";
+import { rxjs as rxJsLink } from "apollo-link-rxjs";
+import { graphql } from "reactive-graphql";
+
+// ...
+
+// Initialize Phoenix
+const eventSyncer = new Phoenix(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
+await eventSyncer.init();
+
+const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
+
+const typeDefs = `
+  type MyEvent {
+    someValue: Int
+    anotherValue: String
+  }
+  type Query {
+    myEvents: MyEvent!
   }
 `;
 
- const eventSyncer = new Phoenix(web3.currentProvider);
+const resolvers = {
+  Query: {
+    myEvents: () => {
+      return eventSyncer.trackEvent(MyContractInstance, 'MyEvent', {filter: {}, fromBlock: 1})
+    }
+  }
+};
 
-      await eventSyncer.init();
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-      const typeDefs = `
-          type Escrow {
-            buyer: String!
-            seller: String!
-            escrowId: Int!
-          }
-          type Query {
-            escrows: Escrow!
-          }
-        `;
-
-      const resolvers = {
-        Query: {
-          escrows: () => {
-            return eventSyncer.trackEvent(this.EscrowContract, "Created", {
-              filter: { buyer: accounts[0] },
-              fromBlock: 1
-            });
-          }
-        }
-      };
-
-      const schema = makeExecutableSchema({
-        typeDefs,
-        resolvers
-      });
-
-      const client = new ApolloClient({
-        // If addTypename:true, the query will fail due to __typename
-        // being added to the schema. reactive-graphql does not
-        // support __typename at this moment.
-        cache: new InMemoryCache({ addTypename: false }),
-        link: PhoenixRxLink(schema)
-      });
-
-      this.setState({ client });
-
-      <ApolloProvider client={this.state.client}>
-        <Query query={MY_QUERY}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Loading...</div>;
-            if (error) {
-              console.error(error);
-              return <div>Error :(</div>;
-            }
-            return (
-              <p>The data returned by the query: {JSON.stringify(data)}</p>
-            );
-          }}
-        </Query>
-      </ApolloProvider>
+const client = new ApolloClient({
+  // If addTypename:true, the query will fail due to __typename
+  // being added to the schema. reactive-graphql does not
+  // support __typename at this moment.
+  cache: new InMemoryCache({ addTypename: false }),
+  link: ApolloLink.from([
+          rxJsLink({}),
+          new ApolloLink(operation => graphql(schema, operation.query))
+        ])
+});
 ```
+
+
+::: tip Using react-apollo
+A practical example can also be found in `examples/react-apollo`.
+:::
