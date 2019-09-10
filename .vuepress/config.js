@@ -32,7 +32,7 @@ module.exports = {
               '/redux-observable'
             ]
           },
-          '/graphql',
+          '/reactive-graphql',
           '/apollo-client'
         ]
       },

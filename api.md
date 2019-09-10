@@ -2,7 +2,7 @@
 
 ## General
 
-### `new Phoenix(web3Provider, [, options])`
+### `new Phoenix(web3Provider [, options])`
 Phoenix constructor. 
 
 **Parameters**
