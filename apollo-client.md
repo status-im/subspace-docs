@@ -22,7 +22,7 @@ const client = new ApolloClient({
 
 ### Example
 
-```js{32-45}
+```js{35-45}
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from "apollo-link";
