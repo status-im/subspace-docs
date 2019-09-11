@@ -1,7 +1,7 @@
 # Getting Started
 
 ## Installation
-Phoenix can be used in browser, node and native script environments. To get started install Phoenix using `npm` or `yarn` by executing this command in your project directory:
+**Subspace** can be used in browser, node and native script environments. To get started install the package `phoenix` using `npm` or `yarn` by executing this command in your project directory:
 ```bash
 # Using npm
 npm install --save phoenix  
@@ -22,7 +22,7 @@ const Phoenix = require('phoenix');
 
 
 ## Connecting to a web3 provider
-To interact with the EVM, Phoenix requires a valid websockets Web3 provider.
+To interact with the EVM, **Subspace** requires a valid websockets Web3 provider.
 
 ```js
 const eventSyncer = new Phoenix(web3.currentProvider);
@@ -31,13 +31,13 @@ eventSyncer.init().then(() => {
 });
 ```
 
-In addition to the provider, `Phoenix` also accepts an `options` object with settings that can change its behavior:
-- `dbFilename` - Name of the database where the information will be stored (default `'phoenix.db'`)
+In addition to the provider, `Subspace` also accepts an `options` object with settings that can change its behavior:
+- `dbFilename` - Name of the database where the information will be stored (default `'subspace.db'`)
 - `callInterval` - Interval of time in milliseconds to query a contract/address to determine changes in state or balance (default: `undefined`. Obtains data every block).
 
 
 ## Reacting to data
-Once it's initialized, you can use Phoenix's methods to track the contract state, events and balances. These functions return RxJS Observables which you can subscribe to, and obtain and transform the observed data via operators.
+Once it's initialized, you can use **Subspace**'s methods to track the contract state, events and balances. These functions return RxJS Observables which you can subscribe to, and obtain and transform the observed data via operators.
 
 ::: tip What is an Observable?
 The `Observable` type can be used to model push-based data sources such as DOM events, timer intervals, and sockets. In addition, observables are:
@@ -124,7 +124,7 @@ subscription.unsubscribe();
 
 
 ## Cleanup
-If Phoenix is not needed anymore, you need can invoke `close()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution, thus avoiding any potential memory leak.
+If **Subspace** is not needed anymore, you need can invoke `close()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by **Subspace** during its normal execution, thus avoiding any potential memory leak.
 
 ```
 eventSyncer.close();

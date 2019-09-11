@@ -1,5 +1,5 @@
 # apollo-client
-To use Phoenix with `apollo-client`, a composed `ApolloLink` must be defined using the `apollo-link-rxjs` and `reactive-graphl` npm packages. Notice that the `addTypename` option of `InMemoryCache` must be set `false`.
+To use **Subspace** with `apollo-client`, a composed `ApolloLink` must be defined using the `apollo-link-rxjs` and `reactive-graphl` npm packages. Notice that the `addTypename` option of `InMemoryCache` must be set `false`.
 
 ```js
 import { ApolloClient } from "apollo-client";
@@ -31,8 +31,8 @@ import { graphql } from "reactive-graphql";
 
 // ...
 
-// Initialize Phoenix
-const eventSyncer = new Phoenix(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
+// Initialize Subspace
+const eventSyncer = new Subspace(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
 await eventSyncer.init();
 
 const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance

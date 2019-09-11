@@ -1,7 +1,7 @@
 {
   "name": "phoenix-docs",
   "version": "1.0.0",
-  "description": "Phoenix Website",
+  "description": "Subspace Website",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf .vuepress/dist",

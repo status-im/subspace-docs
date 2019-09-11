@@ -1,9 +1,9 @@
 # redux 
 
-Phoenix can be used with [redux](https://redux.js.org/). Phoenix returns [`Observables`](https://rxjs-dev.firebaseapp.com/guide/observable), which you can subscribe to, and if this subscription has access to the redux store, it will be able to dispatch actions when the observable emits an event.
+**Subspace** can be used with [redux](https://redux.js.org/). **Subspace** returns [`Observables`](https://rxjs-dev.firebaseapp.com/guide/observable), which you can subscribe to, and if this subscription has access to the redux store, it will be able to dispatch actions when the observable emits an event.
 
 ### Example
-Here's a simple example on how to setup Phoenix to work with `redux`:
+Here's a simple example on how to setup **Subspace** to work with `redux`:
 
 ::: tip 
 This example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/redux)

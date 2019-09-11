@@ -2,23 +2,23 @@
 
 ## General
 
-### `new Phoenix(web3Provider [, options])`
-Phoenix constructor. 
+### `new Subspace(web3Provider [, options])`
+Constructor. 
 
 **Parameters**
 1. `web3Provider` - `Object`: a valid web3 websockets provider.
-2. `options` - `Object` (optional): Options used to initialize Phoenix
-	- `dbFilename` - `String` (optional): Name of the database where the information will be stored (default `'phoenix.db'`)
+2. `options` - `Object` (optional): Options used to initialize Subspace
+	- `dbFilename` - `String` (optional): Name of the database where the information will be stored (default `'subspace.db'`)
 	- `callInterval` - `Number` (optional): - Interval of time in milliseconds to query a contract/address to determine changes in state or balance (default: `undefined`. Obtains data every block).
 
 ### `init()`
-Initializes Phoenix
+Initializes **Subspace**
 
 **Returns**
-`Promise` that once it's resolved, will mean that Phoenix is available to use
+`Promise` that once it's resolved, will mean that **Subspace** is available to use
 
 ### `close()`
-Dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by Phoenix during its normal execution.
+Dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by **Subspace** during its normal execution.
 
 ## Data tracking methods
 
@@ -38,7 +38,7 @@ Track a contract event.
 `RxJS Observable` which will stream the event `returnValues`.
 
 ### `trackProperty(contractObject, functionName [, functionArgs] [, callOptions])`
-Track a constant function / contract state variable on each block mined, or depending on the `callInterval` option used during Phoenix initialization.
+Track a constant function / contract state variable on each block mined, or depending on the `callInterval` option used during **Subspace** initialization.
 
 **Parameters**
 1. `contractObject` - `web3.eth.Contract`: An already initialized contract object pointing to an address and containing a valid ABI.
@@ -53,7 +53,7 @@ Track a constant function / contract state variable on each block mined, or depe
 `RxJS Observable` which will stream the function / variable values. Data type will depend on the contract function invoked. 
 
 ### `trackBalance(address [, tokenAddress])`
-Track balance changes for an address on each block mined, or depending on the `callInterval` option used during Phoenix initialization.
+Track balance changes for an address on each block mined, or depending on the `callInterval` option used during **Subspace** initialization.
 
 **Parameters**
 1. `address` - `String`: The address to get the balance of.

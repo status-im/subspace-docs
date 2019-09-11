@@ -1,2 +1,2 @@
-# Creating a reactive ÐApp with Embark and Phoenix
+# Creating a reactive ÐApp with Embark and Subspace1
 

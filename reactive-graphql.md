@@ -1,6 +1,6 @@
 # reactive-graphql
 
-Using `reactive-graphql` you can execute GraphQL queries against Phoenix observables after you create your own type definitions and resolvers.
+Using `reactive-graphql` you can execute GraphQL queries against **Subspace** observables after you create your own type definitions and resolvers.
 
 ### Example
 

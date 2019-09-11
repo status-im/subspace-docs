@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Phoenix',
+  title: 'Subspace',
   description: 'Reactive ÐApp Development',
   base: '/phoenix-docs/',
   markdown: {
