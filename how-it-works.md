@@ -10,7 +10,7 @@
 ![First Usage - Receiving events](./d2.png)
 Depending on the filter parameters used to track the events, once an event is found, it is stored in `localStorage` and it is also pushed to the observable which delivers it to the ÐApp subscription.
 
-### Usage after the first setup and Tracking already known events and 
+### Tracking already known events 
 After restarting the ÐApp, either by executing it again in case of a console application or refreshing the browser the behavior of `Subspace` will change: 
 ![Second Usage - Setup](./d3.png)
 1. The Dapp will request `Subspace` to track an event it already knows, creating an observable and subscription for that event
