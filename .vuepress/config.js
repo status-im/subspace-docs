@@ -7,6 +7,7 @@ module.exports = {
   },
   themeConfig: {
     displayAllHeaders: true,
+    search: false,
     nav: [
       { text: 'Getting Started', link: '/getting-started/' },
       { text: 'Tutorial', link: '/tutorial' },
