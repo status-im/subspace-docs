@@ -6,7 +6,7 @@ Using `reactive-graphql` you can execute GraphQL queries against **Subspace** ob
 
 
 ```js
-const Phoenix = require('phoenix');
+const Subspace = require('@status-im/subspace');
 const MyContract = require('./MyContract');
 const { pluck } = require('rxjs/operators');
 const { makeExecutableSchema } = require("graphql-tools");
@@ -14,8 +14,8 @@ const gql = require("graphql-tag");
 const { graphql } = require("reactive-graphql");
 
 const run = async () => {
-  const eventSyncer = new Phoenix(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
-  await eventSyncer.init();
+  const subspace = new Subspace(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
+  await subspace.init();
 
   const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
@@ -32,7 +32,7 @@ const run = async () => {
   const resolvers = {
     Query: {
       myEvents: () => {
-        return eventSyncer.trackEvent(MyContractInstance, 'MyEvent', { filter: {}, fromBlock: 1 })
+        return subspace.trackEvent(MyContractInstance, 'MyEvent', { filter: {}, fromBlock: 1 })
       }
     }
   };
@@ -59,5 +59,5 @@ run();
 ```
 
 ::: tip 
-This example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/reactive-graphql)
+This example is available in [Github](https://github.com/status-im/subspace/tree/master/examples/reactive-graphql)
 :::

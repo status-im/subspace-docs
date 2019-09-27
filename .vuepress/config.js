@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Subspace',
   description: 'Reactive ÐApp Development',
-  base: '/phoenix-docs/',
+  base: '/subspace-docs/',
   markdown: {
     lineNumbers: true
   },
@@ -13,7 +13,7 @@ module.exports = {
       { text: 'Tutorial', link: '/tutorial' },
       { text: 'Integrations', link: '/integrations-overview' },
       { text: 'API', link: '/api' },
-      { text: 'Github', link: 'https://github.com/status-im/phoenix' },
+      { text: 'Github', link: 'https://github.com/status-im/subspace' },
     ],
     sidebar: [
       '/',

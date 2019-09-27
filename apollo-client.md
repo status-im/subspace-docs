@@ -32,8 +32,8 @@ import { graphql } from "reactive-graphql";
 // ...
 
 // Initialize Subspace
-const eventSyncer = new Subspace(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
-await eventSyncer.init();
+const subspace = new Subspace(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
+await subspace.init();
 
 const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
@@ -50,7 +50,7 @@ const typeDefs = `
 const resolvers = {
   Query: {
     myEvents: () => {
-      return eventSyncer.trackEvent(MyContractInstance, 'MyEvent', {filter: {}, fromBlock: 1})
+      return subspace.trackEvent(MyContractInstance, 'MyEvent', {filter: {}, fromBlock: 1})
     }
   }
 };

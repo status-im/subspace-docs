@@ -1,23 +1,23 @@
 # Getting Started
 
 ## Installation
-**Subspace** can be used in browser, node and native script environments. To get started install the package `phoenix` using `npm` or `yarn` by executing this command in your project directory:
+**Subspace** can be used in browser, node and native script environments. To get started install the package `@status-im/subspace` using `npm` or `yarn` by executing this command in your project directory:
 ```bash
 # Using npm
-npm install --save phoenix  
+npm install --save @status-im/subspace
 
 # Using yarn
-yarn add phoenix 
+yarn add @status-im/subspace 
 ```
 
 ## Importing the library
 
 ```js
 // ESM (might require babel / browserify)
-import Phoenix from 'phoenix';  
+import Subspace from '@status-im/subspace';  
 
 // CommonJS
-const Phoenix = require('phoenix'); 
+const Subspace = require('@status-im/subspace'); 
 ```
 
 
@@ -25,10 +25,8 @@ const Phoenix = require('phoenix');
 To interact with the EVM, **Subspace** requires a valid websockets Web3 provider.
 
 ```js
-const eventSyncer = new Phoenix(web3.currentProvider);
-eventSyncer.init().then(() => {
-  // Track data!
-});
+const subspace = new Subspace(web3.currentProvider);
+await subspace.init();
 ```
 
 In addition to the provider, `Subspace` also accepts an `options` object with settings that can change its behavior:
@@ -57,7 +55,7 @@ const functionName = "..."; // string containing the name of the contract's cons
 const functionArgs = []; // array containing the arguments of the function to track. Optional
 const callOptions = {from: web3.eth.defaultAccount}; //  Options used for calling. Only `from`, `gas` and `gasPrice` are accepted. Optional
 
-const myObservable$ = eventSyncer.trackProperty(contractObject, functionName, functionArgs, callOptions);
+const myObservable$ = subspace.trackProperty(contractObject, functionName, functionArgs, callOptions);
 ```
 
 ::: tip Tracking the public variables of a contract
@@ -72,7 +70,7 @@ const contractObject = ...; // A web3.eth.Contract object initialized with an ad
 const eventName = "..."; // string containing the name of the event to track.
 const options = { filter: { }, fromBlock: 1 }; // options used to query the events. Optional
 
-const myEventObservable$ = eventSyncer.trackEvent(contractObject, eventName, options)
+const myEventObservable$ = subspace.trackEvent(contractObject, eventName, options)
 
 ```
 
@@ -85,7 +83,7 @@ You can also track changes in both ETH and ERC20 token balances for each mined b
 // Tracking ETH balance
 const address = "0x0001020304050607080900010203040506070809";
 
-eventSyncer
+subspace
   .trackBalance(address)
   .subscribe((balance) => {
     console.log("ETH balance is ", balance)
@@ -97,7 +95,7 @@ eventSyncer
 const address = "0x0001020304050607080900010203040506070809";
 const tokenAddress = "0x744d70fdbe2ba4cf95131626614a1763df805b9e"; // SNT Address
 
-const myBalanceObservable$ = eventSyncer.trackBalance(address, tokenAddress);
+const myBalanceObservable$ = subspace.trackBalance(address, tokenAddress);
 ```
 ::: warning 
 Balances are returned as a string containing the value in *wei*.
@@ -109,7 +107,7 @@ Once you have an `Observable`, you may receive a stream of data by creating a su
 Subscriptions can be disposed by executing the method `unsubscribe()` liberating the resource held by it:
 
 ```js
-const myBalanceObservable$ = eventSyncer.trackBalance(address, tokenAddress);
+const myBalanceObservable$ = subspace.trackBalance(address, tokenAddress);
 const subscription = myBalanceObservable$.subscribe(value => { 
   console.log("The balance is: ", value); 
 });
@@ -127,7 +125,7 @@ subscription.unsubscribe();
 If **Subspace** is not needed anymore, you need can invoke `close()` to dispose and perform the cleanup necessary to remove the internal subscriptions and interval timers created by **Subspace** during its normal execution, thus avoiding any potential memory leak.
 
 ```
-eventSyncer.close();
+subspace.close();
 ```
 ::: warning What about subscriptions created with our observables?
 Any subscription created via the tracking methods must be unsubscribed manually (in the current version).

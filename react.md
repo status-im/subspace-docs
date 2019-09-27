@@ -3,7 +3,7 @@ We provide a higher-order component to connect to enhance presentational compone
 
 ### Usage
 ```js
-import { observe } from 'phoenix/react';
+import { observe } from '@status-im/subspace/react';
 
 const ObserverComponent = observe(WrappedComponent);
 ```
@@ -13,7 +13,7 @@ This enhanced component will subscribe to any observable property it receives wh
 ### Example
 
 ::: tip 
-This example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/react)
+This example is available in [Github](https://github.com/status-im/subspace/tree/master/examples/react)
 :::
 
 
@@ -21,7 +21,7 @@ This example is available in [Github](https://github.com/status-im/phoenix/tree/
 ```js
 import React from "react";
 import ReactDOM from 'react-dom';
-import {observe} from "phoenix/react";
+import {observe} from "@status-im/subspace/react";
 
 const MyComponent = ({eventData}) => {
   // Handle initial state when no data is available
@@ -41,7 +41,7 @@ export default observe(MyComponent);
 ```js
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Phoenix from 'phoenix';
+import Subspace from '@status-im/subspace';
 
 import MyComponentObserver from './MyComponentObserver';
 
@@ -53,10 +53,10 @@ class App extends Component {
   async componentDidMount() {
     const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
-    const eventSyncer = new Phoenix("wss://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
-    await eventSyncer.init()
+    const subspace = new Subspace("wss://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
+    await subspace.init()
     
-    const myEventObservable$ = eventSyncer.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 });
+    const myEventObservable$ = subspace.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 });
     this.setState({ myEventObservable$ });
   }
 
@@ -69,7 +69,7 @@ export default App;
 ```
 
 ::: warning Handling Contract Objects
-The variable `MyContractInstance` is a `web3.eth.Contract` object pointing to a deployed contract address. You can use a DApp framework like [Embark](https://embark.status.im/docs/contracts_javascript.html) to easily import that contract instance: `import { MyContract } from './embarkArtifacts/contracts';`, or use web3.js directly (just like in the example [source code](https://github.com/status-im/phoenix/blob/master/examples/react/src/MyContract.js#L36-L42))
+The variable `MyContractInstance` is a `web3.eth.Contract` object pointing to a deployed contract address. You can use a DApp framework like [Embark](https://embark.status.im/docs/contracts_javascript.html) to easily import that contract instance: `import { MyContract } from './embarkArtifacts/contracts';`, or use web3.js directly (just like in the example [source code](https://github.com/status-im/subspace/blob/master/examples/react/src/MyContract.js#L36-L42))
 :::
 
 #### index.js

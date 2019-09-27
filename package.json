@@ -1,6 +1,6 @@
 {
-  "name": "phoenix-docs",
-  "version": "1.0.0",
+  "name": "subspace-docs",
+  "version": "0.0.1",
   "description": "Subspace Website",
   "main": "index.js",
   "scripts": {
@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/status-im/phoenix-docs.git"
+    "url": "git+https://github.com/status-im/subspace-docs.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/status-im/phoenix-docs/issues"
+    "url": "https://github.com/status-im/subspace-docs/issues"
   },
   "author": "Status Research & Development GMBH",
   "authors": [
@@ -31,7 +31,7 @@
       "homepage": "https://github.com/richard-ramos"
     }
   ],
-  "homepage": "https://github.com/status-im/phoenix-docs#readme",
+  "homepage": "https://github.com/status-im/subspace-docs#readme",
   "devDependencies": {
     "npm-run-all": "^4.1.5",
     "push-dir": "^0.4.1",

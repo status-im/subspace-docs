@@ -6,23 +6,23 @@
 Here's a simple example on how to setup **Subspace** to work with `redux`:
 
 ::: tip 
-This example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/redux)
+This example is available in [Github](https://github.com/status-im/subspace/tree/master/examples/redux)
 :::
 
 #### index.js
 ```js
 import store from './store';
 import web3 from './web3';
-import Phoenix from 'phoenix';
+import Subspace from '@status-im/subspace';
 import { myAction } from './actions';
 
 const run = async () => {
   const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
-  const eventSyncer = new Phoenix("wss://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
-  await eventSyncer.init();
+  const subspace = new Subspace("ws://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
+  await subspace.init();
     
-  eventSyncer.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 })
+  subspace.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 })
              .subscribe(eventData => {
                store.dispatch(myAction(eventData));
              });
@@ -31,7 +31,7 @@ const run = async () => {
 run();
 ```
 ::: warning Handling Contract Objects
-The variable `MyContractInstance` is a `web3.eth.Contract` object pointing to a deployed contract address. You can use a DApp framework like [Embark](https://embark.status.im/docs/contracts_javascript.html) to easily import that contract instance: `import { MyContract } from './embarkArtifacts/contracts';`, or use web3.js directly (just like in the example [source code](https://github.com/status-im/phoenix/blob/master/examples/redux/src/MyContract.js#L36-L42))
+The variable `MyContractInstance` is a `web3.eth.Contract` object pointing to a deployed contract address. You can use a DApp framework like [Embark](https://embark.status.im/docs/contracts_javascript.html) to easily import that contract instance: `import { MyContract } from './embarkArtifacts/contracts';`, or use web3.js directly (just like in the example [source code](https://github.com/status-im/subspace/blob/master/examples/redux/src/MyContract.js#L36-L42))
 :::
 
 #### store.js

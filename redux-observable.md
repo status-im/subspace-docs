@@ -13,7 +13,7 @@ const myEpic = action$ =>
   action$.pipe(
     ofType("SOME_ACTION"),  // Execute when the action type is 'INIT'
     switchMap(action =>
-      eventSyncer
+      subspace
         .trackEvent(MyContract, "MyEventName", { filter: {}, fromBlock: 1})
         .pipe(
           map(myAction) // Trigger redux action: MY_ACTION with the eventData
@@ -25,7 +25,7 @@ const myEpic = action$ =>
 ```
 
 ::: tip 
-An example is available in [Github](https://github.com/status-im/phoenix/tree/master/examples/redux-observable)
+An example is available in [Github](https://github.com/status-im/subspace/tree/master/examples/redux-observable)
 :::
 
 #### Further read
