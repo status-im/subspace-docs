@@ -1,11 +1,12 @@
 module.exports = {
-  title: 'Subspace',
+  title: 'SUBSPACE',
   description: 'Reactive ÐApp Development',
   base: '/subspace-docs/',
   markdown: {
     lineNumbers: true
   },
   themeConfig: {
+    logo: "/assets/img/logo-small.png",
     displayAllHeaders: true,
     search: false,
     nav: [
