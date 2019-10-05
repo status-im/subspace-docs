@@ -80,3 +80,30 @@ import App from './App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
+
+
+```js
+import { observe } from "@status-im/subspace/react";
+
+const ProductComponent = ({ maxRating, minRating, averageRating }) => {
+  return <ul>
+    <li><b>minimum rating: </b> {minRating}</li>
+    <li><b>maximum rating: </b> {maxRating}</li>
+    <li><b>average rating: </b> {averageRating}</li>
+  </ul>;
+};
+
+const ReactiveProductComponent = observe(ProductComponent);
+
+const Product = subspace.contract({abi, address});
+const rating$ = Product.events.Rating.track().map("rating").pipe(map(x => parseInt(x)));
+
+ReactDOM.render(
+  <ReactiveProductComponent
+    maxRating={rating$.pipe($max())}
+    minRating={rating$.pipe($min())}
+    averageRating={rating$.pipe($average())}
+  />,
+  document.getElementById('hello-example')
+);
+```
