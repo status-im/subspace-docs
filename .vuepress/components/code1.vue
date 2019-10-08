@@ -2,92 +2,92 @@
 
   <div>
 
-  <div>
-    <div style="display: block; flex-basis: 33%">
-      <strong>Event Tracking & Event Sourcing</strong>
-      You can track events and react to their values. With Subspace observables doing event sourcing is easy.
+    <div class="code-container">
+      <div class="code-text">
+        <strong>Event Tracking & Event Sourcing</strong>
+        You can track events and react to their values. With Subspace observables doing event sourcing is easy.
+      </div>
+      <div class="code-content">
+
+        <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> $average<span class="token punctuation">,</span> $latest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace"</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span><span class="token function">Rating</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$latest</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">$average</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">rating</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"average rating of the last 5 events is "</span> <span class="token operator">+</span> rating<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div>
+
+      </div>
     </div>
-    <div style="display: block; width: 100%">
 
-      <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> $average<span class="token punctuation">,</span> $latest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace"</span><span class="token punctuation">;</span>
+    <div class="code-container">
+      <div class="code-text">
+        <strong>Tracking State</strong>
+        You can track changes to a contract state variable, by specifying the view function and arguments to call and query the contract.
+      </div>
+      <div class="code-content">
 
-<span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span><span class="token function">Rating</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">const</span> productTitle$ <span class="token operator">=</span> ProductList<span class="token punctuation">.</span>methods<span class="token punctuation">.</span><span class="token function">products</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"title"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  productTitle$<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">title</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"product title is "</span> <span class="token operator">+</span> title<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div>
 
-rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$latest</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">$average</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">rating</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"average rating of the last 5 events is "</span> <span class="token operator">+</span> rating<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div>
-
+      </div>
     </div>
-  </div>
 
-  <div>
-    <div style="display: block; flex-basis: 33%">
-      <strong>Tracking State</strong>
-      You can track changes to a contract state variable, by specifying the view function and arguments to call and query the contract.
+    <div class="code-container">
+      <div class="code-text">
+        <strong>Tracking balances</strong>
+        You can also track changes in both ETH and ERC20 token balances
+      </div>
+      <div class="code-content">
+
+        <div class="language-js line-numbers-mode"><pre class="language-js"><code>Contract<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ETH balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Contract<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span><span class="token string">"0x744d70fdbe2ba4cf95131626614a1763df805b9e"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"SNT balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div>
+
+      </div>
     </div>
-    <div style="display: block; width: 100%">
 
-      <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">const</span> productTitle$ <span class="token operator">=</span> ProductList<span class="token punctuation">.</span>methods<span class="token punctuation">.</span><span class="token function">products</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"title"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-productTitle$<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">title</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"product title is "</span> <span class="token operator">+</span> title<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div>
+    <div class="code-container">
+      <div class="code-text">
+        <strong>React Integration</strong>
+        Subspace can make any react component compatible with observables so you easily reactive components
+      </div>
+      <div class="code-content">
 
+  <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> observe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace/react"</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">ProductComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> maxRating<span class="token punctuation">,</span> minRating<span class="token punctuation">,</span> averageRating <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>ul<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>b<span class="token operator">&gt;</span>minimum rating<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>b<span class="token operator">&gt;</span> <span class="token punctuation">{</span>minRating<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>b<span class="token operator">&gt;</span>maximum rating<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>b<span class="token operator">&gt;</span> <span class="token punctuation">{</span>maxRating<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>b<span class="token operator">&gt;</span>average rating<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>b<span class="token operator">&gt;</span> <span class="token punctuation">{</span>averageRating<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> ReactiveProductComponent <span class="token operator">=</span> <span class="token function">observe</span><span class="token punctuation">(</span>ProductComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> Product <span class="token operator">=</span> subspace<span class="token punctuation">.</span><span class="token function">contract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>abi<span class="token punctuation">,</span> address<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span>Rating<span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>ReactiveProductComponent
+      maxRating<span class="token operator">=</span><span class="token punctuation">{</span>rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$max</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+      minRating<span class="token operator">=</span><span class="token punctuation">{</span>rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$min</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+      averageRating<span class="token operator">=</span><span class="token punctuation">{</span>rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$average</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'hello-example'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div>
+
+      </div>
     </div>
-  </div>
-
-  <div>
-    <div style="display: block; flex-basis: 33%">
-      <strong>Tracking balances</strong>
-      You can also track changes in both ETH and ERC20 token balances
-    </div>
-    <div style="display: block; width: 100%">
-
-      <div class="language-js line-numbers-mode"><pre class="language-js"><code>Contract<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ETH balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Contract<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span><span class="token string">"0x744d70fdbe2ba4cf95131626614a1763df805b9e"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"SNT balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div>
-
-    </div>
-  </div>
-
-  <div>
-    <div style="display: block; flex-basis: 33%">
-      <strong>React Integration</strong>
-      Subspace can make any react component compatible with observables so you easily reactive components
-    </div>
-    <div style="display: block; width: 100%">
-
-<div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> observe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace/react"</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> <span class="token function-variable function">ProductComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> maxRating<span class="token punctuation">,</span> minRating<span class="token punctuation">,</span> averageRating <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token operator">&lt;</span>ul<span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>b<span class="token operator">&gt;</span>minimum rating<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>b<span class="token operator">&gt;</span> <span class="token punctuation">{</span>minRating<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>b<span class="token operator">&gt;</span>maximum rating<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>b<span class="token operator">&gt;</span> <span class="token punctuation">{</span>maxRating<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>b<span class="token operator">&gt;</span>average rating<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>b<span class="token operator">&gt;</span> <span class="token punctuation">{</span>averageRating<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
-  <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> ReactiveProductComponent <span class="token operator">=</span> <span class="token function">observe</span><span class="token punctuation">(</span>ProductComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> Product <span class="token operator">=</span> subspace<span class="token punctuation">.</span><span class="token function">contract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>abi<span class="token punctuation">,</span> address<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span>Rating<span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
-  <span class="token operator">&lt;</span>ReactiveProductComponent
-    maxRating<span class="token operator">=</span><span class="token punctuation">{</span>rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$max</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
-    minRating<span class="token operator">=</span><span class="token punctuation">{</span>rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$min</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
-    averageRating<span class="token operator">=</span><span class="token punctuation">{</span>rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$average</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
-  <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'hello-example'</span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div>
-
-    </div>
-  </div>
 
   </div>
 
