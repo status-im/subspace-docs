@@ -1,7 +1,7 @@
 module.exports = {
   title: 'SUBSPACE',
   description: 'Reactive ÐApp Development',
-  base: '/subspace-docs/',
+  base: '/',
   head: [
     ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/assets/img/logo-small.png"}],
     ['link', { rel: "icon", type: "image/png", sizes: "32x32", href: "/assets/img/logo-small.png"}],
