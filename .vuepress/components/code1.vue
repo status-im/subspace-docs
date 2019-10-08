@@ -1,17 +1,17 @@
 <template lang="html">
 
-  <div>
+  <div id="intro">
 
     <div class="code-container">
       <div class="code-text">
-        <strong>Event Tracking & Event Sourcing</strong>
+        <h3>Event Tracking & Event Sourcing</h3>
         You can track events and react to their values. With Subspace observables doing event sourcing is easy.
       </div>
       <div class="code-content">
 
         <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> $average<span class="token punctuation">,</span> $latest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace"</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span><span class="token function">Rating</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span><span class="token function">Rating</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   rating$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">$latest</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">$average</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">rating</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"average rating of the last 5 events is "</span> <span class="token operator">+</span> rating<span class="token punctuation">)</span>
@@ -23,7 +23,7 @@
 
     <div class="code-container">
       <div class="code-text">
-        <strong>Tracking State</strong>
+        <h3>Tracking State</h3>
         You can track changes to a contract state variable, by specifying the view function and arguments to call and query the contract.
       </div>
       <div class="code-content">
@@ -37,7 +37,7 @@
 
     <div class="code-container">
       <div class="code-text">
-        <strong>Tracking balances</strong>
+        <h3>Tracking balances</h3>
         You can also track changes in both ETH and ERC20 token balances
       </div>
       <div class="code-content">
@@ -56,7 +56,7 @@
 
     <div class="code-container">
       <div class="code-text">
-        <strong>React Integration</strong>
+        <h3>React Integration</h3>
         Subspace can make any react component compatible with observables so you easily reactive components
       </div>
       <div class="code-content">
