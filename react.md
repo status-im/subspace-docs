@@ -13,7 +13,7 @@ This enhanced component will subscribe to any observable property it receives wh
 ### Example
 
 ::: tip 
-This example is available in [Github](https://github.com/status-im/subspace/tree/master/examples/react)
+This example is available in [Github](https://github.com/embark-framework/subspace/tree/master/examples/react-example1)
 :::
 
 

@@ -22,7 +22,6 @@ module.exports = {
     search: false,
     nav: [
       { text: 'Getting Started', link: '/getting-started/' },
-      { text: 'Tutorial', link: '/tutorial' },
       { text: 'Integrations', link: '/integrations-overview' },
       { text: 'API', link: '/api' },
       { text: 'Github', link: 'https://github.com/status-im/subspace' },
