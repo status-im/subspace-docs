@@ -42,14 +42,17 @@
       </div>
       <div class="code-content">
 
-        <div class="language-js line-numbers-mode"><pre class="language-js"><code>Contract<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ETH balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">const</span> address <span class="token operator">=</span> <span class="token string">"0x0001020304050607080900010203040506070809"</span><span class="token punctuation">;</span>
 
-  Contract<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span><span class="token string">"0x744d70fdbe2ba4cf95131626614a1763df805b9e"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"SNT balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  </code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div>
+subspace<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ETH balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+subspace<span class="token punctuation">.</span><span class="token function">trackBalance</span><span class="token punctuation">(</span>address, <span class="token string">"0x744d70fdbe2ba4cf95131626614a1763df805b9e"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">balance</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"SNT balance is "</span><span class="token punctuation">,</span> balance<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div>
 
       </div>
     </div>
@@ -94,8 +97,7 @@
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style lang="css" scoped>
@@ -103,7 +105,8 @@ export default {
   fill: url(#linear-gradient-404);
 }
 
-.cls-2, .cls-6 {
+.cls-2,
+.cls-6 {
   opacity: 0.65;
 }
 
@@ -171,7 +174,8 @@ export default {
   fill: url(#linear-gradient-404-9);
 }
 
-.cls-18, .cls-19 {
+.cls-18,
+.cls-19 {
   fill: #fff;
 }
 
@@ -187,11 +191,16 @@ export default {
   fill: #2d2d2d;
 }
 
-.cls-22, .cls-23, .cls-27, .cls-28, .cls-29 {
+.cls-22,
+.cls-23,
+.cls-27,
+.cls-28,
+.cls-29 {
   fill: none;
 }
 
-.cls-22, .cls-23 {
+.cls-22,
+.cls-23 {
   stroke: #ecf4f8;
   stroke-linecap: round;
   stroke-width: 0.96px;
@@ -201,7 +210,10 @@ export default {
   stroke-linejoin: round;
 }
 
-.cls-23, .cls-27, .cls-28, .cls-29 {
+.cls-23,
+.cls-27,
+.cls-28,
+.cls-29 {
   stroke-miterlimit: 10;
 }
 
@@ -221,7 +233,9 @@ export default {
   stroke: #fbed21;
 }
 
-.cls-27, .cls-28, .cls-29 {
+.cls-27,
+.cls-28,
+.cls-29 {
   stroke-width: 8px;
 }
 
