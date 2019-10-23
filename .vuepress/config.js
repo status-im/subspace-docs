@@ -36,6 +36,7 @@ module.exports = {
         children: [
           ['/integrations-overview', 'Overview'],
           '/react',
+          '/vue',
           {
             title: 'Redux',
             collapsable: false,
