@@ -128,7 +128,7 @@ Balances are returned as a string containing the value in *wei*.
 :::
 
 ## Subscriptions
-Once you have an `Observable`, you may receive a stream of data by creating a subscription.Subscriptions are triggered each time an observable emits a new value. These subscription receive a callback that must have a parameter which represents the value received from the observable (a contract state variable, an event, or the balance of an address);  and they return an object representing the subscription.
+Once you have an `Observable`, you may receive a stream of data by creating a subscription. Subscriptions are triggered each time an observable emits a new value. These subscription receive a callback that must have a parameter which represents the value received from the observable (a contract state variable, an event, or the balance of an address);  and they return an object representing the subscription.
 
 Subscriptions can be disposed by executing the method `unsubscribe()` liberating the resource held by it:
 
