@@ -109,3 +109,16 @@ Track balance changes for an address on each block mined, or depending on the `c
 
 **Returns**
 `RxJS Observable` which will stream a string containing the address balance.
+
+### `trackLogs(options [, abi])`
+Tracks incoming logs, filtered by the given options.
+
+**Parameters**
+1. `options` - `Object` (optional): web3 filter options object to limit the number of logs
+    - `address` - `String|Array` (optional): An address or a list of addresses to only get logs from particular account(s).
+    - `fromBlock` - `Number` (optional): The block number from which to get events on.
+    - `topics` - `Array` (optional): An array of values which must each appear in the log entries. The order is important, if you want to leave topics out use null, e.g. [null, '0x00...']. You can also pass another array for each topic with options for that topic e.g. [null, ['option1', 'option2']].
+2. `abi` - `Array` (optional): Array containing the ABI for the inputs of the logs received. It will automatically decode the logs using this ABI instead of returning the hexadecimal data.
+
+**Returns**
+`RxJS Observable` which will stream the logs. If the inputs ABI is included in the call, the logs will be automatically decoded.
