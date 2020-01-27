@@ -43,7 +43,7 @@ export default {
 
 <script>
 import MyComponent from './components/MyComponent.vue';
-import Subspace from "@status-im/subspace";
+import Subspace from "@embarklabs/subspace";
 
 export default {
   name: 'app',
@@ -56,7 +56,7 @@ export default {
   created: async function(){
     this.MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
-    const subspace = new Subspace("wss://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
+    const subspace = new Subspace("wss://localhost:8545"); // Use a valid provider (geth, parity, infura...)
     await subspace.init();
 
     this.myEventObservable$ = subspace.trackEvent(this.MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 });

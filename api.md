@@ -6,10 +6,11 @@
 Constructor. 
 
 **Parameters**
-1. `web3Provider` - `Object`: a valid web3 websockets provider.
+1. `web3Provider` - `Object`: a valid web3 provider.
 2. `options` - `Object` (optional): Options used to initialize Subspace
 	- `dbFilename` - `String` (optional): Name of the database where the information will be stored (default `'subspace.db'`)
-	- `callInterval` - `Number` (optional): - Interval of time in milliseconds to query a contract/address to determine changes in state or balance (default: `undefined`. Obtains data every block).
+	- `callInterval` - `Number` (optional): - Interval of time in milliseconds to poll a contract/address to determine changes in state or balance (default: `undefined`. Obtains data every block. If using a HttpProvider, the default is: `1000`)
+    - `disableSubscriptions` - `Subspace` by default will attempt to use websocket subscriptions if the current provider supports them, otherwise it will use polling because it asumes the provider is an `HttpProvider`. This functionality can be disabled by passing `true` to this option. (default: `false`)
 
 ### `init()`
 Initializes **Subspace**

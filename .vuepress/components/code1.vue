@@ -9,7 +9,7 @@
       </div>
       <div class="code-content">
 
-        <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> $average<span class="token punctuation">,</span> $latest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace"</span><span class="token punctuation">;</span>
+        <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> $average<span class="token punctuation">,</span> $latest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@embarklabs/subspace"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> rating$ <span class="token operator">=</span> Product<span class="token punctuation">.</span>events<span class="token punctuation">.</span><span class="token function">Rating</span><span class="token punctuation">.</span><span class="token function">track</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token string">"rating"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -64,7 +64,7 @@ subspace<span class="token punctuation">.</span><span class="token function">tra
       </div>
       <div class="code-content">
 
-<div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> observe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@status-im/subspace/react"</span><span class="token punctuation">;</span>
+<div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> observe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@embarklabs/subspace/react"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> <span class="token function-variable function">ProductComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> maxRating<span class="token punctuation">,</span> minRating<span class="token punctuation">,</span> averageRating <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token operator">&lt;</span>ul<span class="token operator">&gt;</span>

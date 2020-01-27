@@ -3,7 +3,7 @@ We provide a higher-order component to connect to enhance presentational compone
 
 ### Usage
 ```js
-import { observe } from '@status-im/subspace/react';
+import { observe } from '@embarklabs/subspace/react';
 
 const ObserverComponent = observe(WrappedComponent);
 ```
@@ -21,7 +21,7 @@ This example is available in [Github](https://github.com/embark-framework/subspa
 ```js
 import React from "react";
 import ReactDOM from 'react-dom';
-import {observe} from "@status-im/subspace/react";
+import {observe} from "@embarklabs/subspace/react";
 
 const MyComponent = ({eventData}) => {
   // Handle initial state when no data is available
@@ -41,7 +41,7 @@ export default observe(MyComponent);
 ```js
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Subspace from '@status-im/subspace';
+import Subspace from '@embarklabs/subspace';
 
 import MyComponentObserver from './MyComponentObserver';
 
@@ -53,7 +53,7 @@ class App extends Component {
   async componentDidMount() {
     const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
-    const subspace = new Subspace("wss://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
+    const subspace = new Subspace("wss://localhost:8545"); // Use a valid provider (geth, parity, infura...)
     await subspace.init()
     
     const myEventObservable$ = subspace.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 });
@@ -83,7 +83,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 
 ```js
-import { observe } from "@status-im/subspace/react";
+import { observe } from "@embarklabs/subspace/react";
 
 const ProductComponent = ({ maxRating, minRating, averageRating }) => {
   return <ul>

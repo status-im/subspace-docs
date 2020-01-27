@@ -32,7 +32,7 @@ import { graphql } from "reactive-graphql";
 // ...
 
 // Initialize Subspace
-const subspace = new Subspace(web3.currentProvider); // Use a valid websocket provider (geth, parity, infura...)
+const subspace = new Subspace(web3.currentProvider); // Use a valid provider (geth, parity, infura...)
 await subspace.init();
 
 const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance

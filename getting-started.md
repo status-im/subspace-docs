@@ -1,28 +1,28 @@
 # Getting Started
 
 ## Installation
-**Subspace** can be used in browser, node and native script environments. To get started install the package `@status-im/subspace` using `npm` or `yarn` by executing this command in your project directory:
+**Subspace** can be used in browser, node and native script environments. To get started install the package `@embarklabs/subspace` using `npm` or `yarn` by executing this command in your project directory:
 ```bash
 # Using npm
-npm install --save @status-im/subspace
+npm install --save @embarklabs/subspace
 
 # Using yarn
-yarn add @status-im/subspace 
+yarn add @embarklabs/subspace 
 ```
 
 ## Importing the library
 
 ```js
 // ESM (might require babel / browserify)
-import Subspace from '@status-im/subspace';  
+import Subspace from '@embarklabs/subspace';  
 
 // CommonJS
-const Subspace = require('@status-im/subspace'); 
+const Subspace = require('@embarklabs/subspace'); 
 ```
 
 
 ## Connecting to a web3 provider
-To interact with the EVM, **Subspace** requires a valid websockets Web3 provider.
+To interact with the EVM, **Subspace** requires a valid Web3 provider. 
 
 ```js
 const subspace = new Subspace(web3.currentProvider);
@@ -32,6 +32,7 @@ await subspace.init();
 In addition to the provider, `Subspace` also accepts an `options` object with settings that can change its behavior:
 - `dbFilename` - Name of the database where the information will be stored (default `'subspace.db'`)
 - `callInterval` - Interval of time in milliseconds to query a contract/address to determine changes in state or balance (default: `undefined`. Obtains data every block).
+- `disableSubscriptions` - `Subspace` by default will attempt to use websocket subscriptions if the current provider supports them, otherwise it will use polling because it asumes the provider is an `HttpProvider`. This functionality can be disabled by passing `true` to this option. (default: `false`)tionality can be forced by passing `true` to this option. (default: `undefined`)
 
 
 ## Reacting to data
@@ -85,7 +86,7 @@ You can easily do event sourcing with subspace.
 For e.g: if you needed to get the average rating of the last 5 events:
 
 ```js
-import { $average, $latest } from "@status-im/subspace";
+import { $average, $latest } from "@embarklabs/subspace";
 
 const rating$ = Product.events.Rating().track().map("rating")).pipe(map(x => parseInt(x)));
 

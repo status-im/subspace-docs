@@ -13,13 +13,13 @@ This example is available in [Github](https://github.com/status-im/subspace/tree
 ```js
 import store from './store';
 import web3 from './web3';
-import Subspace from '@status-im/subspace';
+import Subspace from '@embarklabs/subspace';
 import { myAction } from './actions';
 
 const run = async () => {
   const MyContractInstance = ...; // TODO: obtain a web3.eth.contract instance
 
-  const subspace = new Subspace("ws://localhost:8545"); // Use a valid websocket provider (geth, parity, infura...)
+  const subspace = new Subspace("ws://localhost:8545"); // Use a valid provider (geth, parity, infura...)
   await subspace.init();
     
   subspace.trackEvent(MyContractInstance, "MyEvent", {filter: {}, fromBlock: 1 })
